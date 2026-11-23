@@ -1,0 +1,51 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+// Tabla que se reemplaza completa en cada importación (DELETE por rango + INSERT).
+// El id solo existe porque Prisma requiere una clave primaria en cada modelo.
+model BaseCumplimientoEgp {
+  id                    Int       @id @default(autoincrement())
+  negocioPais           String?   @map("negocio_pais") @db.NVarChar(100)
+  organizationCode      String    @map("organization_code") @db.NVarChar(100)
+  organizationName      String?   @map("organization_name") @db.NVarChar(255)
+  workAreaCode          String?   @map("work_area_code") @db.NVarChar(255)
+  workCenterCode        String?   @map("work_center_code") @db.NVarChar(255)
+  resourceCode          String?   @map("resource_code") @db.NVarChar(255)
+  resourceName          String?   @map("resource_name") @db.NVarChar(255)
+  usageRate             String?   @map("usage_rate") @db.NVarChar(100)
+  grupo                 String?   @map("grupo") @db.NVarChar(100)
+  resourceClassCode     String?   @map("resource_class_code") @db.NVarChar(100)
+  resourceQuantity      String?   @map("resource_quantity") @db.NVarChar(100)
+  fecha                 DateTime  @map("fecha") @db.Date
+  standardOperationCode String?   @map("standard_operation_code") @db.NVarChar(100)
+  turnoReportado        String?   @map("turno_reportado") @db.NVarChar(100)
+  modelo                String?   @map("modelo") @db.NVarChar(100)
+  codigoProducto        String?   @map("codigo_producto") @db.NVarChar(100)
+  descripcionProducto   String?   @map("descripcion_producto") @db.NVarChar(255)
+  udm                   String?   @map("udm") @db.NVarChar(100)
+  fmil                  String?   @map("fmil") @db.NVarChar(100)
+  undRecMax             String?   @map("und_rec_max") @db.NVarChar(100)
+  hpok                  String?   @map("hpok") @db.NVarChar(100)
+  ton                   String?   @map("ton") @db.NVarChar(100)
+  mil                   String?   @map("mil") @db.NVarChar(100)
+  meta                  String?   @map("meta") @db.NVarChar(100)
+  hpokAcum              String?   @map("hpok_acum") @db.NVarChar(100)
+  hprgdia               String?   @map("hprgdia") @db.NVarChar(100)
+  hprgdiaAcum           String?   @map("hprgdia_acum") @db.NVarChar(100)
+  hdiaAcum              String?   @map("hdia_acum") @db.NVarChar(100)
+  cvjInventario         String?   @map("cvj_inventario") @db.NVarChar(100)
+  cvjCostosPac          String?   @map("cvj_costos_pac") @db.NVarChar(100)
+  cvjCorporativa        String?   @map("cvj_corporativa") @db.NVarChar(100)
+  undPrd                String?   @map("und_prd") @db.NVarChar(100)
+  fechaConsulta         DateTime? @map("fecha_consulta") @db.DateTimeOffset
+
+  @@index([organizationCode, fecha])
+  @@map("base_cumplimiento_egp")
+}
